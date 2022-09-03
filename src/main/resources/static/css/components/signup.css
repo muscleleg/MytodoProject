@@ -1,0 +1,47 @@
+@import "../reset.css";
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+input,select{
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid rgb(192 192 192 / 70%)
+}
+input[type="submit"] {
+    background-color: #0B5ED7;
+    color: white;
+    height: 50px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.signupContainer{
+    width: 500px;
+    /* border: 1px solid black; */
+    padding: 20px 20px;
+}
+.header__container__titlemenu__title{
+    display: flex;
+    justify-content: center;
+    color: blue;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.signupContainer__item{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.signupContainer__item__title{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 800;
+}

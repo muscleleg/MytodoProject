@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyToDo - 여러분의 목표를 이루세요.</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+
+<body>
+  <div class="header">
+    <div class="space49"></div>
+    <div class="header__container">
+        <div class="header__container__titlemenu">
+            <div class="header__container__titlemenu__title">
+                <a href="home.html" th:href="@{/}"><span>MyToDo</span></a>
+            </div>
+            <div class="header__container__titlemenu__menu">
+                <a href="todolist.html" th:href="@{/todolist}"><span>일정추가</span></a>
+                <a href="statistics.html" th:href="@{/statistics}"><span >통계</span></a>
+                <a href="timeplan.html" th:href="@{/timeplan}"><span>시간계획</span></a>
+                <a href="group.html" th:href="@{/group}"><span>모임</span></a>
+            </div>
+        </div>
+        <a href="login.html" th:href="@{/logout}">
+            <div class="login">
+                <span>로그아웃</sapn>
+            </div>
+        </a>
+    </div>
+</div>
+
+    <div class="contents">
+        <div class="introduce">
+            <div class="introduce__left">
+                <div class="introduce__left__text">
+                    <div>My To DO를 통해</div>
+                    <div>목표에 집중할 수 있습니다.</div>
+                </div>
+                <div class="introduce__left__buttonArea">
+                    <a href="login.html">
+                        </a><div class="introduce__left__buttonArea_button"><a href="http://127.0.0.1:5500/login.html">
+                            </a><a href="login.html" th:href="@{/login}"><span>시작하기</span></a>
+                        </div>
+                    
+                </div>
+            </div>
+            <div class="introduce__rightImg">
+                <img src="../static/jpeg/introduce__img.png" th:src="@{jpeg/introduce__img.png}"alt="소개이미지">
+            </div>
+        </div>
+    </div>
+</script>
+</div></div></body></html>

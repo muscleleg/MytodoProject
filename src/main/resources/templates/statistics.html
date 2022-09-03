@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyToDo - 통계</title>
+    <link rel="stylesheet" href="../static/css/style.css"th:href="@{css/style.css}">
+
+
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="space49"></div>
+        <div class="header__container">
+            <div class="header__container__titlemenu">
+                <div class="header__container__titlemenu__title">
+                    <a href="home.html" th:href="@{/}"><span>MyToDo</span></a>
+                </div>
+                <div class="header__container__titlemenu__menu">
+                    <a href="todolist.html" th:href="@{/todolist}"><span>일정추가</span></a>
+                    <a href="statistics.html" th:href="@{/statistics}"><span class="bold">통계</span></a>
+                    <a href="timeplan.html" th:href="@{/timeplan}"><span>시간계획</span></a>
+                    <a href="group.html" th:href="@{/group}"><span>모임</span></a>
+                </div>
+            </div>
+            <a href="login.html" th:href="@{/logout}">
+                <div class="login">
+                <span>로그아웃</sapn>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="contents">
+       
+    </div>
+</body>
+
+</html>

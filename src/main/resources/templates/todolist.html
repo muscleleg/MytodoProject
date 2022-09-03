@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyToDo - 일정추가</title>
+    <link rel="stylesheet" href="../static/css/style.css"th:href="@{css/style.css}">
+
+
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="space49"></div>
+        <div class="header__container">
+            <div class="header__container__titlemenu">
+                <div class="header__container__titlemenu__title">
+                    <a href="home.html" th:href="@{/}"><span>MyToDo</span></a>
+                </div>
+                <div class="header__container__titlemenu__menu">
+                        <a href="todolist.html" th:href="@{/todolist}"><span class="bold">일정추가</span></a>
+                        <a href="statistics.html" th:href="@{/statistics}"><span >통계</span></a>
+                        <a href="timeplan.html" th:href="@{/timeplan}"><span>시간계획</span></a>
+                        <a href="group.html" th:href="@{/group}"><span>모임</span></a>
+                    </div>
+                </div>
+            <a href="login.html" th:href="@{/logout}">
+                <div class="login">
+                <span>로그아웃</sapn>
+                </div>
+            </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="contents">
+        <div class="todolist">
+            <div class="todolist__sidebar">
+                <div class="todolist__sidebar__todolistbutton">
+                    <i class="fa-solid fa-table-list"></i></div>
+                <div class="todolist__sidebar__searchbutton">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+            </div>
+
+            
+            <div class="todolist__sidebarpast">
+                <div class="todolist__sidebarpast__container">
+                    <div class="todolist__sidebarpast__container__item">
+                        
+                            <div class="todolist__sidebarpast__container__item__title">
+                                2021년 8월 15일
+                            </div>
+                      
+                        <div class="todolist__sidebarpast__container__item__content">
+                            영어공부
+                        </div>
+                    </div>
+                    <div class="todolist__sidebarpast__container__item">
+                        <div class="todolist__sidebarpast__container__item__title">
+                            2021년 8월 3일
+                        </div>
+                        <div class="todolist__sidebarpast__container__item__content">
+                            집안일
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="todolist__sidebarsearch">
+           
+            </div>
+
+
+            <div class="todolist__contentcontainer">
+
+                <div class="todolist__contentcontainer__title">
+                    <div class="todolist__contentcontainer__title__text">
+                        <input type="date"min="2000-01-01" max="2099-12-31"id="date"/>
+                    </div>
+                </div>
+
+                <div class="todolist__contentcontainer__todolist">
+
+                    <div class="todolist__contentcontainer__todolist__item">
+                        <div class="todolist__contentcontainer__todolist__item__text">
+                            재판의 전심절차로서 행정심판을 할 수 있다. 행정심판의 절차는 법률로 정하되, 사법절차가 준용되어야 한다. 국회의원의 선거구와 비례대표제 기타 선거에 관한 사항은 법률로 정한다. 모든 국민은 법률이 정하는 바에 의하여 납세의 의무를 진다. 국가는 청원에 대하여 심사할 의무를 진다. 선거에 있어서 최고득표자가 2인 이상인 때에는 국회의 재적의원 과반수가 출석한 공개회의에서 다수표를 얻은 자를 당선자로 한다.
+                        </div>
+                        <div class="todolist__contentcontainer__todolist__item__range">
+                            <input type="range" id="success" name="success"
+                            min="0" max="10">
+                        </div>
+                    </div>
+
+                    <div class="todolist__contentcontainer__todolist__addbutton">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/b3dd31cfb2.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{js/todolist.js}" src="../static/js/todolist.js"></script>
+</body>
+
+</html>

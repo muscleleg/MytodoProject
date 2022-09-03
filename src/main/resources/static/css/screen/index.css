@@ -1,0 +1,41 @@
+.introduce{
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none; 
+    user-select: none;
+      margin-bottom: 30px;
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.introduce__left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.introduce__left__text{
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 49px;
+}
+.introduce__left__buttonArea_button{
+    height: 49px;
+    width: 136px;
+    border-radius: 10px;
+    background-color: #0D99FF;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    justify-content: center;
+}
+.introduce__rightImg{
+    display: flex;
+    align-items: center;
+}

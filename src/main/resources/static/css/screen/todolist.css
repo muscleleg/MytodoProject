@@ -1,0 +1,166 @@
+.todolist{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #bfbfc0;
+}
+.todolist__sidebar{
+    width: 50px;
+    height: 100%;
+    background-color: #dee1e6;
+    border-right: 1px solid  #bfbfc0;
+    z-index: 2;
+}
+.todolist__sidebar__todolistbutton, .todolist__sidebar__searchbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+    transition: all ease-in-out 0.2s;
+}.todolist__sidebar__todolistbutton:hover, .todolist__sidebar__searchbutton:hover{
+    background-color: #dee1e6;
+    -webkit-box-shadow: inset 0px 0px 33px 2px rgba(0,0,0,0.09); 
+    box-shadow: inset 0px 0px 33px 2px rgba(0,0,0,0.09);
+    color: white;
+    text-shadow: 0px 0px 7px rgba(0,0,0,0.39);
+}
+.buttonClick,.buttonEnter{
+    background-color: #dee1e6;
+    -webkit-box-shadow: inset 0px 0px 33px 2px rgba(0,0,0,0.09); 
+    box-shadow: inset 0px 0px 33px 2px rgba(0,0,0,0.09);
+    color: white;
+    text-shadow: 0px 0px 7px rgba(0,0,0,0.39);
+}
+
+
+.todolist__sidebarpast,.todolist__sidebarsearch{
+    display: none;
+    width: 230px;
+    height: 100%;
+    background-color: #dee1e6;
+    z-index: 1;
+    
+}
+.visible{
+    display: inline;
+    -webkit-animation: slide-right 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-right 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+    @-webkit-keyframes slide-right {
+        0% {
+          -webkit-transform: translateX(-50px);
+                  transform: translateX(-50px);
+        }
+        100% {
+          -webkit-transform: translateX(0px);
+                  transform: translateX(0px);
+        }
+      }
+      @keyframes slide-right {
+        0% {
+          -webkit-transform: translateX(-50px);
+                  transform: translateX(-50px);
+        }
+        100% {
+          -webkit-transform: translateX(0px);
+                  transform: translateX(0px);
+        }
+      }
+      
+.todolist__sidebarpast__container{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+
+}
+.todolist__sidebarpast__container__item{
+    -webkit-box-shadow: 0px 0px 33px 2px rgba(0,0,0,0.09); 
+    box-shadow: 0px 0px 33px 2px rgba(0,0,0,0.09);
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    width: 150px;
+}
+.todolist__sidebarpast__container__item__title{
+    font-weight: bolder;
+    font-size: 12px;
+    color: #625C5C;
+    margin-bottom: 7px;
+    
+}
+.todolist__sidebarpast__container__item__content{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+.todolist__contentcontainer{
+    /* flex-grow: 1; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.todolist__contentcontainer__title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    /* border-bottom: 1px solid  #bfbfc0; */
+    
+}
+.todolist__contentcontainer__title__text{
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bolder;
+    width: 150px;
+    height: 40px;
+    -webkit-box-shadow: 0px 5px 15px -2px rgba(0,0,0,0.25); 
+    box-shadow: 0px 5px 15px -2px rgba(0,0,0,0.25);
+}
+.todolist__contentcontainer__title__text input{
+    font-family: 'Noto Sans';
+    font-size: 15px;
+    cursor: pointer;
+    border:none;
+}
+.todolist__contentcontainer__todolist{ 
+    height: 100%;
+    width: 100%;
+
+}
+.todolist__contentcontainer__todolist__item{
+    width: 100%;
+}
+.todolist__contentcontainer__todolist__addbutton{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    bottom: 35px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+  
+    
+    /* border: 1px solid black; */
+}
+.todolist__contentcontainer__todolist__addbutton i{
+    font-size: 50px;
+    color:#0B5ED7;
+    transition: ease-in-out 0.2s;
+
+
+}
+.todolist__contentcontainer__todolist__addbutton i:hover{
+    color:#053a8a;
+
+}
