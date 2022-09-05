@@ -28,8 +28,8 @@ public class loginTest {
         Member member1 = Member.createMember("aammoof", "1234", "김재준", "1234", "aamoof@naver.com");
 
         memberService.join(member);
-        Member findMember = memberService.findOne(member.getId());
-//        Assertions.assertThat(findMember.getId()).isEqualTo(member1.getId());
+        Member findMember = memberService.findOneById(member.getId());
+        Assertions.assertThat(findMember.getId()).isEqualTo(member1.getId());
 
     }
 }

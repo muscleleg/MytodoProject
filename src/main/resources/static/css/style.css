@@ -12,9 +12,27 @@
 html{
     width: 100%;
     height: 100%;
-}
 
+}
+.preload {
+
+    /* transition: none !important;
+
+    -webkit-transition: none !important;
+
+    -moz-transition: none !important;
+
+    -ms-transition: none !important;
+
+    -o-transition: none !important;
+    -webkit-animation: -up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */
+
+  }
 body{
+
+    min-width: 1000px;
+
     box-sizing: border-box;
     width: 100%;
     height: 100%;

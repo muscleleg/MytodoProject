@@ -42,10 +42,15 @@ public class MemberRepository {
 
     }
     public Member findByLoginId(String loginId) {
-        List<Member> findMemberId = em.createQuery("select m from Member m where m.loginId =: loginId",Member.class)
-                .setParameter("loginId",loginId)
-                .getResultList();
-        return findMemberId.get(0);
+        try {
+            Member findMemberId = em.createQuery("select m from Member m where m.loginId =: loginId", Member.class)
+                    .setParameter("loginId", loginId)
+                    .getSingleResult();
+            return findMemberId;
+        }catch(NoResultException e){
+            return null;
+        }
+
     }
 
     public Member findByLogin(String loginId, String password) {

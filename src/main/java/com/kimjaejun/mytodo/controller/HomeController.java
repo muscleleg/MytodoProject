@@ -18,11 +18,7 @@ public class HomeController {
         }
         return "loginhome";
     }
-    @GetMapping("/todolist")
-    public String todolist(HttpSession session){
 
-        return "todolist";
-    }
     @GetMapping("/statistics")
     public String statistics(){
         return "statistics";

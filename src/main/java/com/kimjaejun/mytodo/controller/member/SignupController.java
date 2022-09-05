@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 @Controller
@@ -38,5 +39,11 @@ public class SignupController {
             return "signup";
         }
         return "redirect:/";
+    }
+
+    @PostConstruct
+    public void init() {
+        Member member = Member.createMember("test","test","testUser","none","test@gmail.com");
+        memberService.join(member);
     }
 }
