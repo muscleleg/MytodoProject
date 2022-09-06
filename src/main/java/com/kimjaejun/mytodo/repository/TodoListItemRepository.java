@@ -23,4 +23,12 @@ public class TodoListItemRepository {
                 .getResultList();
         return todoListItems;
     }
+
+    public TodoListItem findOne(Long todoListItemId) {
+        return em.find(TodoListItem.class, todoListItemId);
+    }
+    public void remove(TodoListItem todoListItem){
+        em.remove(todoListItem);
+    }
+
 }

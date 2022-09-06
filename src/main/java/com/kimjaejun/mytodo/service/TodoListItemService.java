@@ -35,6 +35,14 @@ public class TodoListItemService {
         TodoListItem todoListItem = new TodoListItem(text, todoList, date, 0);
         todoListItemRepository.save(todoListItem);
     }
+    public void updatePercentage(Long todoListItemId, int statusPercentage){
+        TodoListItem todoListItem = todoListItemRepository.findOne(todoListItemId);
+        todoListItem.changePercentage(statusPercentage);
+    }
+    public void delete(Long todoListItemId){
+        TodoListItem todoListItem = todoListItemRepository.findOne(todoListItemId);
+        todoListItemRepository.remove(todoListItem);
+    }
 //    @PostMapping("/todolist/{date}/add")
 //    public String addTodoListItem(@PathVariable("date") String addDate, @ModelAttribute("form") TodoListAddForm form, HttpSession session) {
 //        LocalDate date = LocalDate.parse(addDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));

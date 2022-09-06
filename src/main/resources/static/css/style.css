@@ -15,7 +15,7 @@ html{
 
 }
 .preload {
-
+/* 
     /* transition: none !important;
 
     -webkit-transition: none !important;
@@ -26,7 +26,7 @@ html{
 
     -o-transition: none !important;
     -webkit-animation: -up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */
+    animation: scale-up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */ */
 
   }
 body{
@@ -45,4 +45,8 @@ body{
 }
 .bold{
     font-weight: bold;
+}
+button[type="submit"]{
+    padding: 0px 0px;
+    border: none;
 }

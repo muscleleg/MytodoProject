@@ -34,7 +34,9 @@ public class TodoListItem {
         this.registerDate = registerDate;
         this.statusPercentage = statusPercentage;
     }
-
+    public void changePercentage(int statusPercentage) {
+        this.statusPercentage = statusPercentage;
+    }
     public static TodoListItem creatTodoListItem(String title, TodoList todoList, LocalDate registerDate, int statusPercentage) {
         TodoListItem todoListItem = new TodoListItem(title, todoList, registerDate,statusPercentage);
         return todoListItem;
