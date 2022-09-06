@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyToDo - 일정추가</title>
-    <link rel="stylesheet" href="../static/css/style.css"th:href="@{css/style.css}">
-    <!-- <script
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <script
   src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
   integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
-  crossorigin="anonymous"></script> -->
+  crossorigin="anonymous"></script>
 
 </head>
 
-<body>
+<body class="preload">
 
-    <div class="header preload">
+    <div class="header">
         <div class="space49"></div>
         <div class="header__container">
             <div class="header__container__titlemenu">
@@ -90,23 +90,40 @@
                 <div class="todolist__contentcontainer__todolist">
 
 
-                    <div class="todolist__contentcontainer__todolist__item " th:each="todoListItem:${todoList}">
-                        <div class="todolist__contentcontainer__todolist__item__text"th:text="${todoListItem.getTitle()}">
-                            한줄
-                        </div>
-                        <div class="todolist__contentcontainer__todolist__item__range">
-                            <input type="range" id="success5" name="success" min="0" max="100" oninput="Output5.value = success5.value">
-                            <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons">
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__percentage"><output id="Output5" >0</output>%</div>
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__savebutton">저장</div>
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__complete margin_right"><i class="fa-solid fa-square-check"></i></div>
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__delete"><i class="fa-solid fa-square-xmark"></i></div>
+                        <div class="todolist__contentcontainer__todolist__item " th:each="todoListItem,i:${todoList}">
+                            <div class="todolist__contentcontainer__todolist__item__text"
+                                 th:text="${todoListItem.getTitle()}">
+                                한줄
                             </div>
+                            <form action="" th:action="|/todolist/${date}/${todoListItem.id}/edit|" th:method="get">
+
+                            <div class="todolist__contentcontainer__todolist__item__range">
+                                <input type="range" id="status5" th:id="${'status'+i.count}" min="0" max="100"
+                                       oninput="Output5.value = success5.value"
+                                       th:oninput="|Output${i.count}.value = status${i.count}.value|"
+                                       th:value="${todoListItem.getStatusPercentage()}" th:name="${'status'+i.count}"/>
+                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons">
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__percentage">
+                                        <output id="Output5" th:id="${'Output'+i.count}">0</output>
+                                        %
+                                    </div>
+                                    <button type="submit"
+                                            class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__savebutton">
+                                        저장
+                                    </button>
+                            </form>
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__complete margin_right">
+                                        <i class="fa-solid fa-square-check"></i></div>
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__delete">
+                                        <i class="fa-solid fa-square-xmark"></i></div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
                     
 
                 </div>
+
                     <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
                     <div class="todolist__contentcontainer__form">
                         <form action="" method="post" th:object="${addform}" th:action="@{/todolist/{id}/add (id=${addform.getRegisterDate()})}">
@@ -127,11 +144,11 @@
 
         </div>
     </div>
-    <script type="text/javascript" th:src="@{js/removetransition.js}" src="../static/js/removetransition.js"></script>
 
-    <script type="text/javascript" th:src="@{js/todolist.js}" src="../static/js/todolist.js"></script>
-    <script src="https://kit.fontawesome.com/b3dd31cfb2.js" crossorigin="anonymous"></script>
     
 </body>
+<script type="text/javascript" th:src="@{/js/removetransition.js}" src="../static/js/removetransition.js"></script>
 
+<script type="text/javascript" th:src="@{/js/todolist.js}" src="../static/js/todolist.js"></script>
+<script src="https://kit.fontawesome.com/b3dd31cfb2.js" crossorigin="anonymous"></script>
 </html>
