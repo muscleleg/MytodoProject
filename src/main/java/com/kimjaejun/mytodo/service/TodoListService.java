@@ -18,7 +18,7 @@ public class TodoListService {
 
     public void join(TodoList todoList) {
 
-        TodoList findTodoList = todoListRepository.findByDate(todoList.getRegisterDate());
+        TodoList findTodoList = todoListRepository.findByDate(todoList.getRegisterDate(),todoList.getMember());
         if (findTodoList == null) {
             todoListRepository.save(todoList);
         }

@@ -37,15 +37,15 @@ class TodoListItemRepositoryTest {
         em.persist(member);
         TodoList todoList = TodoList.createTodoList(member, LocalDate.now());
         em.persist(todoList);
-        TodoListItem todoListItem1 = TodoListItem.creatTodoListItem("hello", todoList, LocalDate.now(),0);
-        TodoListItem todoListItem2 = TodoListItem.creatTodoListItem("hello", todoList, LocalDate.now(),0);
+//        TodoListItem todoListItem1 = TodoListItem.creatTodoListItem("hello", todoList, LocalDate.now(),0);
+//        TodoListItem todoListItem2 = TodoListItem.creatTodoListItem("hello", todoList, LocalDate.now(),0);
         List<TodoListItem> listItems = new ArrayList<>();
         listItems.add(todoListItem1);
         listItems.add(todoListItem2);
 
         todoListItemRepository.save(todoListItem1);
         todoListItemRepository.save(todoListItem2);
-        List<TodoListItem> findList = todoListItemRepository.findByDate(LocalDate.now());
+        List<TodoListItem> findList = todoListItemRepository.findByDate(LocalDate.now(),todoList);
         Assertions.assertThat(findList).isEqualTo(listItems);
     }
 }

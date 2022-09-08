@@ -36,7 +36,7 @@ class TodoListItemServiceTest {
         LocalDate date = LocalDate.now();
         TodoList todoList = TodoList.createTodoList(member,date);
         todoListRepository.save(todoList);
-        TodoList findTodoList = todoListRepository.findByDate(date);
+        TodoList findTodoList = todoListRepository.findByDate(date,member);
         Assertions.assertThat(todoList).isEqualTo(findTodoList);
     }
 }

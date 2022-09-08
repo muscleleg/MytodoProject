@@ -5,6 +5,7 @@
 /* screens */
 @import "screen/index.css";
 @import "screen/todolist.css";
+@import "screen/loginhome.css";
 
 @import "reset.css";
 
@@ -26,7 +27,7 @@ html{
 
     -o-transition: none !important;
     -webkit-animation: -up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */ */
+    animation: scale-up-center 110s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */
 
   }
 body{

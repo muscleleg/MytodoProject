@@ -27,12 +27,12 @@ public class TodoListItemService {
     private final TodoListItemRepository todoListItemRepository;
 
     public void join(LocalDate date, Member member,String text) {
-        TodoList todoList = todoListRepository.findByDate(date);
+        TodoList todoList = todoListRepository.findByDate(date,member);
         if (todoList == null) {
             todoList = TodoList.createTodoList(member, date);
             todoListService.join(todoList);
         }
-        TodoListItem todoListItem = new TodoListItem(text, todoList, date, 0);
+        TodoListItem todoListItem = new TodoListItem(text, todoList,member, date, 0);
         todoListItemRepository.save(todoListItem);
     }
     public void updatePercentage(Long todoListItemId, int statusPercentage){

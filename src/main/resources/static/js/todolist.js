@@ -8,12 +8,12 @@ const todolist__contentcontainerForm=document.querySelector("div.todolist__conte
 const todolist__addbutton=document.querySelector("div.todolist__contentcontainer__todolist__addbutton");
 const todolist__formcancelbutton=document.querySelector("div.todolist__contentcontainer__form__buttons__cancel");
 //=================달력날짜 현재 날짜로 변경=========================//
-Date.prototype.toDateInputValue = (function() {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0,10);
-});
-document.getElementById('date').value = new Date().toDateInputValue();
+// Date.prototype.toDateInputValue = (function() {
+//     var local = new Date(this);
+//     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+//     return local.toJSON().slice(0,10);
+// });
+// document.getElementById('date').value = new Date().toDateInputValue();
 //================================================================//
 function handle_button_Enter(b){
     // b.style.backgroundColor ="#a9a9a9";
@@ -26,11 +26,11 @@ function handle_button_leave(b){
     console.log("leavetest");
 }
 function handle_button_click(b1,b2,s1,s2){
-    b1.classList.toggle("buttonClick");
-    b2.classList.remove("buttonClick");
+    // b1.classList.toggle("buttonClick");
+    // b2.classList.remove("buttonClick");
 
-    s1.classList.toggle("visible");
-    s2.classList.remove("visible");
+    s1.classList.toggle("formvisible");
+    s2.classList.remove("formvisible");
 
 }
 function handle_button_clickForm(form){
