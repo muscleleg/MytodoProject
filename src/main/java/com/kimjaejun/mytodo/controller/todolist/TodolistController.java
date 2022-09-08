@@ -14,15 +14,11 @@ import com.kimjaejun.mytodo.service.TodoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.List;
@@ -44,52 +40,91 @@ public class TodolistController {
         return "redirect:/todolist/" + stringDate;
 //        return "todolist";
     }
+    @PostMapping("/todolist/search")
+    public String searchTodoList(@RequestParam("search")String search,HttpSession session,Model model) {
+        //==어디서든 날짜쓰려고 편의상 넣은 것==//
+        LocalDate date = LocalDate.now();
+        String text = search;
+        model.addAttribute("searchValue", text);
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        if (text.equals("") || text == null) {
+            List<TodoListItem> findItems = todoListItemRepository.findByMember(member);
+            model.addAttribute("todoList",findItems);
+
+        }else{
+            List<TodoListItem> findItems = todoListItemRepository.findByText(member,text);
+            model.addAttribute("todoList",findItems);
+
+        }
+        List<TodoListItem> noSuccess = todoListItemRepository.findByNoSuccess(member);
+        model.addAttribute("noSuccessTodoList",noSuccess);
+        return "searchTodolist";
+    }
     @GetMapping("/todolist/{date}")
-    public String addTodoListItem(@PathVariable("date") String stringDate, Model model) {
+    public String addTodoListItem(@PathVariable("date") String stringDate,HttpSession session, Model model) {
         LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
 
         //==빈폼 보내기, todolist.html의 addform에 쓰기위해==//
         TodoListAddForm todoListAddForm = new TodoListAddForm();
         todoListAddForm.setRegisterDate(date);
-
-        //==리스트 뽑아오기==//
-        List<TodoListItem> findItems = todoListItemRepository.findByDate(date);
-        model.addAttribute("date", date);
-        model.addAttribute("todoList",findItems);
         model.addAttribute("addform", todoListAddForm);
+        //==어디서든 날짜쓰려고 편의상 넣은 것==//
+        model.addAttribute("date", date);
+
+        //==아이디 가져오기==//
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        //==contnet - TodoList 리스트 가져오기==//
+        TodoList todoList = todoListRepository.findByDate(date, member);
+
+
+        //==contnet - TodoListItem 리스트 가져오기 ==//
+        List<TodoListItem> findItems = todoListItemRepository.findByDate(date,todoList);
+        model.addAttribute("todoList",findItems);
+        //==sidebar - TodoListItem==//
+        List<TodoListItem> noSuccess = todoListItemRepository.findByNoSuccess(member);
+        model.addAttribute("noSuccessTodoList",noSuccess);
 
         return "todolist";
     }
 
+
+    @PostMapping("/todolist/move")
+    public String moveTodoList(@RequestParam("date") String stringDate) {
+        return "redirect:/todolist/" + stringDate;
+    }
+
     @PostMapping("/todolist/{date}/add")
-    public String addTodoListItem(@PathVariable("date") String addDate, @ModelAttribute("form") TodoListAddForm form,HttpSession session) {
-        LocalDate date = LocalDate.parse(addDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
-        String stringDate = date.format(DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
+    public String addTodoListItem(@PathVariable("date") String stringDate, @ModelAttribute("form") TodoListAddForm form, HttpSession session) {
 
-
+        LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
+//        String stringDate = date.format(DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Member findMember = memberRepository.findOne(member.getId());
         String text = form.getText();
-        todoListItemService.join(date,member,text);
-//        TodoList todoList = todoListRepository.findByDate(date);
-//        if (todoList == null) {
-//            todoList = TodoList.createTodoList(member, date);
-////            todoListService.join(todoList);
-//        }
-//        TodoListItem todoListItem = new TodoListItem(form.getText(), todoList, date, 0);
-//        todoListItemRepository.save(todoListItem);
+        todoListItemService.join(date, member, text);
         return "redirect:/todolist/" + stringDate;
     }
-//    @GetMapping("/todolist/{todolistItemId}")
-//    public String addTodoListItem(@PathVariable("todolistItemId") String stringDate, Model model) {
-//        LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"))
-@GetMapping("/todolist/{date}/{todolistItemId}/{status}")
-public String editStatusTodolistItem(@PathVariable("date") String stringDate, @PathVariable("todolistItemId") String TodolistItemId, @PathVariable("status") String rawStatus, Model model, HttpServletRequest request) {
-//    String status = rawStatus.substring(rawStatus.indexOf("="));
-    Enumeration<String> parameterNames = request.getParameterNames();
-    String key = parameterNames.nextElement();
-    String parameter = request.getParameter(key);
+    ///todolist/2022-09-07/11/edit?status1=61
+    ///todolist/2022-09-07/11/edit?status2=34
 
-    return "loginhome";
-}
+    @GetMapping("/todolist/{date}/{todolistItemId}/{status}")
+    public String editStatusTodoListItem(@PathVariable("date") String stringDate, @PathVariable("todolistItemId") String ItemId, @PathVariable("status") String rawStatus, Model model, HttpServletRequest request) {
+    //    String status = rawStatus.substring(rawStatus.indexOf("="));
+        Enumeration<String> parameterNames = request.getParameterNames();
+        String key = parameterNames.nextElement();
+        String parameter = request.getParameter(key);
+        Long todolistItemId = Long.parseLong(ItemId);
+        int statusPercentage = Integer.parseInt(parameter);
+        //==itemid를 알면 다른사람이 todoListItem을 수정할 수 있음, 수정해야함==//
+        todoListItemService.updatePercentage(todolistItemId,statusPercentage);
+        return "redirect:/todolist/"+stringDate;
+    }
+    @GetMapping("/todolist/{date}/{todolistItemId}/delete")
+    public String deleteTodoListItem(@PathVariable("date") String stringDate, @PathVariable("todolistItemId") String ItemId){
+        Long todolistItemId = Long.parseLong(ItemId);
+        todoListItemService.delete(todolistItemId);
+        return "redirect:/todolist/"+stringDate;
+
+    }
 }

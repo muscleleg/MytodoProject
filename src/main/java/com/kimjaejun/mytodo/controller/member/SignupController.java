@@ -41,9 +41,5 @@ public class SignupController {
         return "redirect:/";
     }
 
-    @PostConstruct
-    public void init() {
-        Member member = Member.createMember("test","test","testUser","none","test@gmail.com");
-        memberService.join(member);
-    }
+
 }

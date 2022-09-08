@@ -60,7 +60,6 @@
                             </div>
                         </a>
                     </div>
-
                     <div class="todolist__sidebarpast__container__noitem" th:if="${noSuccessTodoList == null} or ${noSuccessTodoList.size() == 0}">
                         <div>To-do List가 없습니다.</div>
                     </div>
@@ -69,50 +68,41 @@
             </div>
 
             <div class="todolist__sidebarsearch">
-                <form th:action="@{/todolist/search}" method="post">
+                <form th:action="@{/todolist/search}"method="post">
                 <input type="text"name="search"><button type="submit">검색</button>
                 </form>
             </div>
 
             <div class="todolist__contentcontainer">
                 <div class="todolist__contentcontainer__title">
-                    <form action="/todolist/move"method="post">
-                    <div class="todolist__contentcontainer__title__date">
-                        <input type="date"min="2000-01-01" max="2099-12-31"id="date"name="date"th:value="${date}"/>
-                        <button type="submit">이동</button>
+                    <div class="todolist__contentcontainer__title__searchresult">
+                        "<p style="font-weight: bold" th:text="${searchValue}">내용</p>"의 검색결과
                     </div>
-                    </form>    
+
                 </div>
 
                 <div class="todolist__contentcontainer__todolist">
-                    <div class="todolist__contentcontainer__todolist__item " th:each="todoListItem,i:${todoList}">
-                        <form action="" th:action="|/todolist/${date}/${todoListItem.id}/edit|" th:method="get"><div class="todolist__contentcontainer__todolist__item__text" th:text="${todoListItem.getTitle()}">한줄</div><div class="todolist__contentcontainer__todolist__item__range">
-                            <input type="range" id="status5" th:id="${'status'+i.count}" min="0" max="100" oninput="Output5.value = success5.value" th:oninput="|Output${i.count}.value = status${i.count}.value|" th:value="${todoListItem.getStatusPercentage()}" th:name="${'status'+i.count}"/>
-                            <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons">
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__percentage"><output id="Output5" th:id="${'Output'+i.count}"th:text="${todoListItem.getStatusPercentage()}">0</output>%</div>
-                                <button type="submit" class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__savebutton">저장</button>
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__complete margin_right"><a th:href="|/todolist/${date}/${todoListItem.id}/edit?status${i.count}=100|"><i class="fa-solid fa-square-check"></i></a></div>
-                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__delete"><a th:href="|/todolist/${date}/${todoListItem.id}/delete|"><i class="fa-solid fa-square-xmark"></i></a></div>
+                        <div class="todolist__contentcontainer__todolist__item " th:each="todoListItem,i:${todoList}">
+                            <form action="" th:action="|/todolist/${date}/${todoListItem.id}/edit|" th:method="get">
+                            <div class="todolist__contentcontainer__todolist__item__text" th:text="${todoListItem.getTitle()}">한줄</div>
+                            <div class="todolist__contentcontainer__todolist__item__range">
+                                <input type="range" id="status5" th:id="${'status'+i.count}" min="0" max="100" oninput="Output5.value = success5.value" th:oninput="|Output${i.count}.value = status${i.count}.value|" th:value="${todoListItem.getStatusPercentage()}" th:name="${'status'+i.count}"/>
+                                <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons">
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__percentage"><output id="Output5" th:id="${'Output'+i.count}"th:text="${todoListItem.getStatusPercentage()}">0</output>%</div>
+                                    <button type="submit" class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__savebutton">저장</button>
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__complete margin_right"><a th:href="|/todolist/${date}/${todoListItem.id}/edit?status${i.count}=100|"><i class="fa-solid fa-square-check"></i></a></div>
+                                    <div class="todolist__contentcontainer__todolist__item__range__percentage_or_buttons__delete"><a th:href="|/todolist/${date}/${todoListItem.id}/delete|"><i class="fa-solid fa-square-xmark"></i></a></div>
+                                </div>
                             </div>
+                            </form>
                         </div>
-                        </form>
-                    </div>
                     <div class="todolist__contentcontainer__todolist__noitem" th:if="${todoList == null} or ${todoList.size() == 0}">
                         <div>To-do List가 없습니다.</div>
                     </div>
                 </div>
 
-                    <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
-                    <div class="todolist__contentcontainer__form">
-                        <form action="" method="post" th:object="${addform}" th:action="@{/todolist/{id}/add (id=${addform.getRegisterDate()})}">
-                            <textarea th:field="*{text}"maxlength="1000"></textarea>
-                            <div class ="todolist__contentcontainer__form__buttons">
-                                <button class="todolist__contentcontainer__form__buttons__add">저장</button>
-                                <div class="todolist__contentcontainer__form__buttons__cancel">취소</div>
-                            </div>
+                    <a th:href="@{/todolist}"><div class="todolist__contentcontainer__todolist__back" ><i class="fa-solid fa-arrow-left"></i></div></a>
 
-                        </form>
-                    </div>
             </div>
 
         </div>

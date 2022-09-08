@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,27 +38,25 @@
     </div>
 </div>
 
-    <div class="contents">
-        <div class="introduce">
-            <div class="introduce__left">
-                <div class="introduce__left__text">
-                    <div>My To DO를 통해</div>
-                    <div>목표에 집중할 수 있습니다.</div>
-                </div>
-                <div class="introduce__left__buttonArea">
-                    <a href="login.html">
-                        </a><div class="introduce__left__buttonArea_button"><a href="http://127.0.0.1:5500/login.html">
-                            </a><a href="login.html" th:href="@{/login}"><span>시작하기</span></a>
-                        </div>
-                    
-                </div>
+    <div class="loginhome__contents">
+        <div class="loginhome__title">이번주 일정</div>
+        <div class="loginhome__contentcontainer__todolist">
+            <div class="loginhome__contentcontainer__todolist__item " th:each="todoListItem,i:${todoList}">
+                <a th:href="|/todolist/${todoListItem.getRegisterDate()}|">
+                    <div>
+                        <div class="loginhome__contentcontainer__todolist__item__title" th:text="${todoListItem.getRegisterDate()}">2021년 8월 15일</div>
+                        <div class="loginhome__contentcontainer__todolist__item__content"th:text="${todoListItem.getTitle()}">테스트</div>
+                        <div class="loginhome__contentcontainer__todolist__item__percentage"th:text="${todoListItem.getStatusPercentage()+'%'}">34%</div>
+                    </div>
+                </a>
             </div>
-            <div class="introduce__rightImg">
-                <img src="../static/jpeg/introduce__img.png" th:src="@{/jpeg/introduce__img.png}"alt="소개이미지">
+            <div class="todolist__contentcontainer__todolist__noitem" th:if="${todoList == null} or ${todoList.size() == 0}">
+                <div>일정이 없습니다.</div>
             </div>
         </div>
     </div>
-</script>
-  <script type="text/javascript" th:src="@{/js/removetransition.js}" src="../static/js/removetransition.js"></script>
 
-  </div></div></body></html>
+
+</body>
+<script type="text/javascript" th:src="@{/js/removetransition.js}" src="../static/js/removetransition.js"></script>
+</html>

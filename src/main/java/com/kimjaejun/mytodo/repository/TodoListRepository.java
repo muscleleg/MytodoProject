@@ -18,12 +18,13 @@ public class TodoListRepository {
     public void save(TodoList todoList) {
         em.persist(todoList);
     }
-    public TodoList findByDate(LocalDate date){
+    public TodoList findByDate(LocalDate date,Member member){
 //        LocalDate date = LocalDate.parse(date, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
 
         try {
-            TodoList findTodoList = em.createQuery("select t from TodoList t where t.registerDate =: date", TodoList.class)
+            TodoList findTodoList = em.createQuery("select t from TodoList t where t.registerDate =: date and t.member=:member", TodoList.class)
                     .setParameter("date", date)
+                    .setParameter("member", member)
                     .getSingleResult();
             return findTodoList;
         }catch(NoResultException e){

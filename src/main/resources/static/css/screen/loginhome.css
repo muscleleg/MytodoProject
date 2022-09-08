@@ -1,0 +1,73 @@
+.loginhome__contents{
+    box-sizing: border-box;
+    /* display: flex; */
+    width: 100%;
+    min-width: 1169px;
+
+    /* border: 2px solid black; */
+    flex-grow: 1;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+.loginhome__title{
+    width: 100%;
+    padding:20px 30px;
+    text-decoration-line: underline;
+    font-weight: bold;
+    text-decoration-style: solid;
+}
+.loginhome__contentcontainer__todolist{
+    box-sizing: border-box;
+    padding: 30px 30px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    /* border: 1px black solid; */
+    align-items: center;
+    /* justify-content: center; */
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+}
+.loginhome__contentcontainer__todolist__item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding:20px 20px 10px 20px;
+    /* border: 1px solid black; */
+    /* max-width: 30%; */
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    margin-right: 20px;
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    transition: all ease-in-out 0.25s;
+}
+.loginhome__contentcontainer__todolist__item:hover{
+
+    -webkit-box-shadow: 0px 0px 9px 8px rgba(185, 185, 185);
+    box-shadow: 0px 0px 9px 8px rgba(185, 185, 185);
+
+}
+.loginhome__contentcontainer__todolist__item__title{
+    font-weight: bolder;
+    font-size: 12px;
+    color: #625C5C;
+    margin-bottom: 7px;
+
+}
+.loginhome__contentcontainer__todolist__item__content{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    word-break:break-all;
+}
+.loginhome__contentcontainer__todolist__item__percentage{
+    margin-top: 5px;
+    text-align: end;
+    color: red;
+}
