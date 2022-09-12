@@ -1,0 +1,40 @@
+.statics__contents{
+    box-sizing: border-box;
+    /* display: flex; */
+    width: 100%;
+    min-width: 1169px;
+    max-width: 1169px;
+
+    /* border: 2px solid black; */
+    flex-grow: 1;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+.statics__contents__title{
+    box-sizing: border-box;
+    width: 100%;
+    padding:20px 30px;
+    /*text-decoration-line: underline;*/
+    font-weight: bold;
+    /*text-decoration-style: solid;*/
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    margin:10px 0px;
+    border-radius: 10px;
+}
+
+.statics__contents__container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+.statics__contents__weekchart{
+    width: 700px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    margin: 20px 0px;
+}
