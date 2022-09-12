@@ -11,6 +11,7 @@ import com.kimjaejun.mytodo.service.TodoListItemService;
 import com.kimjaejun.mytodo.service.TodoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
@@ -31,10 +32,14 @@ public class initData {
         Member member = Member.createMember("test","test","testUser","none","test@gmail.com");
         memberService.join(member);
         Member findmember = memberRepository.findByLoginId("test");
-        LocalDate date = LocalDate.now();
-        TodoList todoList = TodoList.createTodoList(member,date);
-        todoListService.join(todoList);
-        todoListItemService.join(date,member,"todolist테스트입니다.");
+        for (int i = 1; i <= 12; i++) {
+            LocalDate date = LocalDate.of(2022, i, 1);
+            TodoList todoList = TodoList.createTodoList(member,date);
+            todoListService.join(todoList);
+            TodoListItem todoListItem = TodoListItem.creatTodoListItem("test", todoList, member, date, i);
+            todoListItemService.join(todoListItem);
+        }
+
     }
 
     @PostConstruct

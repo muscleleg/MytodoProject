@@ -12,7 +12,7 @@
 .loginhome__title{
     width: 100%;
     padding:20px 30px;
-    text-decoration-line: underline;
+    /*text-decoration-line: underline;*/
     font-weight: bold;
     text-decoration-style: solid;
 }

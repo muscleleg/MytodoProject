@@ -39,7 +39,7 @@
 </div>
 
     <div class="loginhome__contents">
-        <div class="loginhome__title">이번주 일정</div>
+        <div class="loginhome__title">이번주 일정 (<span th:text="${startDay}">startDate</span>~<span th:text="${endDay}">endDate</span>)</div>
         <div class="loginhome__contentcontainer__todolist">
             <div class="loginhome__contentcontainer__todolist__item " th:each="todoListItem,i:${todoList}">
                 <a th:href="|/todolist/${todoListItem.getRegisterDate()}|">

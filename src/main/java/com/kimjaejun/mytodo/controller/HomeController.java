@@ -5,6 +5,7 @@ import com.kimjaejun.mytodo.domain.Member;
 import com.kimjaejun.mytodo.domain.TodoListItem;
 import com.kimjaejun.mytodo.repository.TodoListItemRepository;
 import com.kimjaejun.mytodo.repository.TodoListRepository;
+import com.kimjaejun.mytodo.utils.DayCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,11 @@ public class HomeController {
         }
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         List<TodoListItem> findItems = todoListItemRepository.findByNoSuccessThisWeek(member);
+
+        DayCalculator dayCalculator = new DayCalculator();
+        dayCalculator.thisWeek();
+        model.addAttribute("startDay",dayCalculator.getStart());
+        model.addAttribute("endDay", dayCalculator.getEnd());
         model.addAttribute("todoList",findItems);
         return "loginhome";
     }

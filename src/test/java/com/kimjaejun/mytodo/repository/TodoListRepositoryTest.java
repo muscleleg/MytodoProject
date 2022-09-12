@@ -29,10 +29,9 @@ class TodoListRepositoryTest {
     @Transactional
     void save() {
         Member member = memberRepository.findByLoginId("test");
-
         TodoList todoList = TodoList.createTodoList(member, LocalDate.now());
         todoListRepository.save(todoList);
         TodoList findTodoList = todoListRepository.findByMemberId(member);
-        org.assertj.core.api.Assertions.assertThat(todoList).isEqualTo(findTodoList);
+
     }
 }

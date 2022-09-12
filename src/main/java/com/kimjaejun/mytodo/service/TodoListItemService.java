@@ -25,14 +25,19 @@ public class TodoListItemService {
     private final TodoListService todoListService;
     private final TodoListRepository todoListRepository;
     private final TodoListItemRepository todoListItemRepository;
+    //테스트용
+    public void join(TodoListItem todoListItem){
+        todoListItemRepository.save(todoListItem);
+    }
+    //toDolistItem 웹에서 생성할때용
+    public void join(LocalDate date, Member member, String text) {
 
-    public void join(LocalDate date, Member member,String text) {
-        TodoList todoList = todoListRepository.findByDate(date,member);
+        TodoList todoList = todoListRepository.findByDate(date, member);
         if (todoList == null) {
             todoList = TodoList.createTodoList(member, date);
             todoListService.join(todoList);
         }
-        TodoListItem todoListItem = new TodoListItem(text, todoList,member, date, 0);
+        TodoListItem todoListItem = new TodoListItem(text, todoList, member, date, 0);
         todoListItemRepository.save(todoListItem);
     }
     public void updatePercentage(Long todoListItemId, int statusPercentage){
