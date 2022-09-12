@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -38,6 +39,16 @@ public class TodoListItemService {
             todoListService.join(todoList);
         }
         TodoListItem todoListItem = new TodoListItem(text, todoList, member, date, 0);
+        todoListItemRepository.save(todoListItem);
+    }
+    public void joinTestValue(LocalDate date, Member member, String text) {
+        Random random = new Random();
+        TodoList todoList = todoListRepository.findByDate(date, member);
+        if (todoList == null) {
+            todoList = TodoList.createTodoList(member, date);
+            todoListService.join(todoList);
+        }
+        TodoListItem todoListItem = new TodoListItem(text, todoList, member, date, random.nextInt(100)+1);
         todoListItemRepository.save(todoListItem);
     }
     public void updatePercentage(Long todoListItemId, int statusPercentage){

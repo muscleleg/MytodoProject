@@ -34,10 +34,11 @@ public class initData {
         Member findmember = memberRepository.findByLoginId("test");
         for (int i = 1; i <= 12; i++) {
             LocalDate date = LocalDate.of(2022, i, 1);
-            TodoList todoList = TodoList.createTodoList(member,date);
-            todoListService.join(todoList);
-            TodoListItem todoListItem = TodoListItem.creatTodoListItem("test", todoList, member, date, i);
-            todoListItemService.join(todoListItem);
+            int len = date.withDayOfMonth(date.lengthOfMonth()).getDayOfMonth();
+            for (int j = 1; j <= len; j++) {
+                date = LocalDate.of(2022, i, j);
+                todoListItemService.joinTestValue(date,member,"테스트 : "+date.getYear()+"-"+i+"-"+j);
+            }
         }
 
     }

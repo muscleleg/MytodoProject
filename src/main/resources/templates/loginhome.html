@@ -54,7 +54,23 @@
                 <div>일정이 없습니다.</div>
             </div>
         </div>
+        <div class="loginhome__title">이번주 완료한 일정 (<span th:text="${startDay}">startDate</span>~<span th:text="${endDay}">endDate</span>)</div>
+        <div class="loginhome__contentcontainer__todolist">
+            <div class="loginhome__contentcontainer__todolist__item " th:each="todoListItem,i:${successFindItems}">
+                <a th:href="|/todolist/${todoListItem.getRegisterDate()}|">
+                    <div>
+                        <div class="loginhome__contentcontainer__todolist__item__title" th:text="${todoListItem.getRegisterDate()}">2021년 8월 15일</div>
+                        <div class="loginhome__contentcontainer__todolist__item__content"th:text="${todoListItem.getTitle()}">테스트</div>
+                        <div class="loginhome__contentcontainer__todolist__item__percentage"th:text="${todoListItem.getStatusPercentage()+'%'}">34%</div>
+                    </div>
+                </a>
+            </div>
+            <div class="todolist__contentcontainer__todolist__noitem" th:if="${successFindItems == null} or ${successFindItems.size() == 0}">
+                <div>완료한 일정이 없습니다.</div>
+            </div>
+        </div>
     </div>
+
 
 
 </body>

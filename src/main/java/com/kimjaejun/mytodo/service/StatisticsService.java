@@ -1,15 +1,12 @@
 package com.kimjaejun.mytodo.service;
 
-import com.kimjaejun.mytodo.SessionConst;
 import com.kimjaejun.mytodo.domain.Member;
-import com.kimjaejun.mytodo.domain.TodoListItem;
 import com.kimjaejun.mytodo.repository.TodoListItemRepository;
-import com.kimjaejun.mytodo.utils.DayCalculator;
+import com.kimjaejun.mytodo.utils.DateCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class StaticsService {
+public class StatisticsService {
 
     private final TodoListItemRepository todoListItemRepository;
 
@@ -40,16 +37,15 @@ public class StaticsService {
     public List<Double> getWeekAverage(Member member,int year, int month) {
         ArrayList<Double> list = new ArrayList<>();
         LocalDate date;
-        DayCalculator dayCalculator = new DayCalculator();
-        int len = dayCalculator.calcEndDayFromMonth(year,month);
+        DateCalculator dateCalculator = new DateCalculator();
+        int len = dateCalculator.calcEndDayFromMonth(year,month);
         int endDay;
         int i=1;
         while ( i <= len) {
-            endDay = dayCalculator.calcEndDayOfWeek(year, month, i);
+            endDay = dateCalculator.calcEndDayOfWeek(year, month, i);
             Double result = todoListItemRepository.findBySuccessPercentageYearDay(member,year,month,i,endDay);
             i = 1 + endDay;
             list.add(result);
-
         }
         return list;
     }

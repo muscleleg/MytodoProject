@@ -1,19 +1,29 @@
 package com.kimjaejun.mytodo.utils;
 
+import com.kimjaejun.mytodo.domain.Member;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.time.temporal.ChronoField.DAY_OF_WEEK;
 
 @Getter
-public class DayCalculator {
+public class DateCalculator {
     private LocalDate start;
     private LocalDate end;
     private int thisYear = LocalDate.now().getYear();
     private int thisMonth = LocalDate.now().getMonthValue();
-
+    public int getThisYear() {
+        return LocalDate.now().getYear();
+    }
+    public int getThisMonth() {
+        return LocalDate.now().getMonthValue();
+    }
+    public int getThisDay() {
+        return LocalDate.now().getDayOfMonth();
+    }
     //요번주//
     public void thisWeek() {
         LocalDate today = LocalDate.now();
@@ -62,5 +72,19 @@ public class DayCalculator {
             return monthEnd;
         }
         return end;
+    }
+    public List<Integer> getWeekFromMonth(int year, int month) {
+        ArrayList<Integer> list = new ArrayList<>();
+        DateCalculator dateCalculator = new DateCalculator();
+        int len = dateCalculator.calcEndDayFromMonth(year,month);
+        int endDay;
+        int i=1;
+        int count=0;
+        while ( i <= len) {
+            endDay = dateCalculator.calcEndDayOfWeek(year, month, i);
+            i = 1 + endDay;
+            list.add(++count);
+        }
+        return list;
     }
 }

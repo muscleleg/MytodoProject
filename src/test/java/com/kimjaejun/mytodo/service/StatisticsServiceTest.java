@@ -11,28 +11,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Transactional
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class StaticsServiceTest {
+class StatisticsServiceTest {
 
     @Autowired
-    StaticsService staticsService;
+    StatisticsService statisticsService;
     @Autowired
     MemberRepository memberRepository;
 
     @Test
     public void 전체월테스트() {
         Member member = memberRepository.findByLogin("test", "test");
-        List<Double> monthAverage = staticsService.getMonthAverage(member,2022);
+        List<Double> monthAverage = statisticsService.getMonthAverage(member,2022);
         System.out.println("monthAverage = " + monthAverage);
     }
     @Test
     public void 주차별평균테스트() {
         Member member = memberRepository.findByLogin("test", "test");
-        List<Double> weekAverage = staticsService.getWeekAverage(member,2022,8);
+        List<Double> weekAverage = statisticsService.getWeekAverage(member,2022,8);
         System.out.println("weekAverage = " + weekAverage);
     }
 

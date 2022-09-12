@@ -3,7 +3,7 @@ package com.kimjaejun.mytodo.repository;
 import com.kimjaejun.mytodo.domain.Member;
 import com.kimjaejun.mytodo.domain.TodoList;
 import com.kimjaejun.mytodo.domain.TodoListItem;
-import com.kimjaejun.mytodo.utils.DayCalculator;
+import com.kimjaejun.mytodo.utils.DateCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -39,61 +39,93 @@ public class TodoListItemRepository {
 //        int day = today.get(DAY_OF_WEEK);
 //        LocalDate start = today.minusDays(day-1);
 //        LocalDate end = start.plusDays( 6);
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.thisWeek();
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisWeek();
 
         return em.createQuery("select t from TodoListItem t where t.member=:member and t.statusPercentage < 100 and t.registerDate >= :start and t.registerDate <=:end", TodoListItem.class)
                 .setParameter("member", member)
-                .setParameter("start", dayCalculator.getStart())
-                .setParameter("end", dayCalculator.getEnd())
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
+                .getResultList();
+
+    }
+    public List<TodoListItem> findByThisWeek(Member member) {
+//        LocalDate today = LocalDate.now();
+//        //1.월,2.화,3수
+//        int day = today.get(DAY_OF_WEEK);
+//        LocalDate start = today.minusDays(day-1);
+//        LocalDate end = start.plusDays( 6);
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisWeek();
+
+        return em.createQuery("select t from TodoListItem t where t.member=:member and t.registerDate >= :start and t.registerDate <=:end", TodoListItem.class)
+                .setParameter("member", member)
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
+                .getResultList();
+
+    }
+    public List<TodoListItem> findBySuccessThisWeek(Member member) {
+//        LocalDate today = LocalDate.now();
+//        //1.월,2.화,3수
+//        int day = today.get(DAY_OF_WEEK);
+//        LocalDate start = today.minusDays(day-1);
+//        LocalDate end = start.plusDays( 6);
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisWeek();
+
+        return em.createQuery("select t from TodoListItem t where t.member=:member and t.statusPercentage = 100 and t.registerDate >= :start and t.registerDate <=:end", TodoListItem.class)
+                .setParameter("member", member)
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
                 .getResultList();
 
     }
     //원하는 년,월,일로 평균조회//
     public Double findBySuccessPercentageYearDay(Member member,int year,int month,int start,int end) {
 
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.day(year,month,start,end);
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.day(year,month,start,end);
 
         return em.createQuery("select AVG(t.statusPercentage) from TodoListItem t where t.member=:member and t.registerDate >= :start and t.registerDate <=:end", Double.class)
                 .setParameter("member", member)
-                .setParameter("start", dayCalculator.getStart())
-                .setParameter("end", dayCalculator.getEnd())
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
                 .getSingleResult();
     }
     //==요번주 평균 메소드==//
     public Double findBySuccessPercentageThisWeek(Member member) {
 
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.thisWeek();
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisWeek();
 
         return em.createQuery("select AVG(t.statusPercentage) from TodoListItem t where t.member=:member and t.registerDate >= :start and t.registerDate <=:end", Double.class)
                 .setParameter("member", member)
-                .setParameter("start", dayCalculator.getStart())
-                .setParameter("end", dayCalculator.getEnd())
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
                 .getSingleResult();
     }
     //==요번달 평균 메소드==//
     public Double findBySuccessPercentageThisMonth(Member member) {
 
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.thisMonth();
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisMonth();
 
         return em.createQuery("select AVG(t.statusPercentage) from TodoListItem t where t.member=:member and t.registerDate >= :start and t.registerDate <=:end", Double.class)
                 .setParameter("member", member)
-                .setParameter("start", dayCalculator.getStart())
-                .setParameter("end", dayCalculator.getEnd())
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
                 .getSingleResult();
     }
     //==해당 월의 평균을 구하는 메소드//
     public Double findBySuccessPercentageMonth(Member member,int year,int month) {
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.month(year,month);
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.month(year,month);
 
         return em.createQuery("select AVG(t.statusPercentage) from TodoListItem t where t.member=:member and t.registerDate >= :start and t.registerDate <=:end", Double.class)
                 .setParameter("member", member)
-                .setParameter("start", dayCalculator.getStart())
-                .setParameter("end", dayCalculator.getEnd())
+                .setParameter("start", dateCalculator.getStart())
+                .setParameter("end", dateCalculator.getEnd())
                 .getSingleResult();
     }
     @SuppressWarnings("unchecked")

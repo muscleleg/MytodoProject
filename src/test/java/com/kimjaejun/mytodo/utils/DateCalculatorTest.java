@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class DayCalculatorTest {
+class DateCalculatorTest {
     @Autowired
     TodoListItemRepository todoListItemRepository;
     @Autowired

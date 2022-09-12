@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
   src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
   integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
   crossorigin="anonymous"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 </head>
@@ -39,10 +39,219 @@
         </div>
     </div>
 
-    <div class="contents">
-       
+    <div class="statics__contents">
+        <div class="statics__contents__title">이번주 달성률 (<span th:text="${startDay}">startDate</span>~<span th:text="${endDay}">endDate</span>)</div>
+
+        <div class=statics__contents__container>
+            <div class="statics__contents__weekchart">
+            <canvas id="weekchart"></canvas>
+          </div>
+        </div>
+
+        <div class="statics__contents__title">주차별 달성률 (<span th:text="${month}">Month</span>월)</div>
+
+        <div class=statics__contents__container>
+            <div class="statics__contents__weekchart">
+                <canvas id="monthweekchart"></canvas>
+            </div>
+        </div>
+
+        <div class="statics__contents__title">월별 달성률 (<span th:text="${year}">2022</span>년도)</div>
+
+        <div class=statics__contents__container>
+            <div class="statics__contents__weekchart">
+                <canvas id="yearchart"></canvas>
+            </div>
+        </div>
+
     </div>
 </body>
 <script type="text/javascript" th:src="@{js/removetransition.js}" src="../static/js/removetransition.js"></script>
 
+<script th:inline="javascript">
+
+  const labels = [
+    '월',
+    '화',
+    '수',
+    '목',
+    '금',
+    '토',
+      '일',
+  ];
+
+  const weekchartdata = {
+    labels: labels,
+    datasets: [{
+      label: '평균 완료율',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+        data: /*[[${thisWeekPercentage}]]*/[0, 10, 5, 2, 20, 30, 45,40],
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+  
+    }]
+  };
+
+  const weekchartconfig = {
+    type: 'bar',
+    data: weekchartdata,
+
+    options: {scales: {
+            y: {
+                beginAtZero: true,
+                max:100,
+            }
+          
+        }}
+  };
+</script>
+<script th:inline="javascript">
+
+    const monthweekchartlabels = /*[[${monthWeekLabel}]]*/[
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+    ];
+
+    const monthweekchartdata = {
+        labels: monthweekchartlabels,
+        datasets: [{
+            label: '평균 완료율',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: /*[[${monthWeekAverage}]]*/[0, 10, 5, 2, 20, 30, 45,40],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+
+        }]
+    };
+
+    const monthweekchartconfig = {
+        type: 'bar',
+        data: monthweekchartdata,
+
+        options: {scales: {
+                y: {
+                    beginAtZero: true,
+                    max:100,
+                }
+
+            }}
+    };
+</script>
+
+<script th:inline="javascript">
+
+    const yearchartlabels = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+    ];
+
+    const yearchartdata = {
+        labels: yearchartlabels,
+        datasets: [{
+            label: '평균 완료율',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: /*[[${yearAverage}]]*/[0, 10, 5, 2, 20, 30, 45,40],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+
+        }]
+    };
+
+    const yearchartconfig = {
+        type: 'bar',
+        data: yearchartdata,
+
+        options: {scales: {
+                y: {
+                    beginAtZero: true,
+                    max:100,
+                }
+
+            }}
+    };
+</script>
+<script>
+    const thisweek = new Chart(
+      document.getElementById('weekchart'),
+      weekchartconfig
+    );
+    const monthweek = new Chart(
+        document.getElementById('monthweekchart'),
+        monthweekchartconfig
+    );
+    const year = new Chart(
+        document.getElementById('yearchart'),
+        yearchartconfig
+    );
+
+  </script>
 </html>

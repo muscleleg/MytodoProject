@@ -4,8 +4,7 @@ import com.kimjaejun.mytodo.SessionConst;
 import com.kimjaejun.mytodo.domain.Member;
 import com.kimjaejun.mytodo.domain.TodoListItem;
 import com.kimjaejun.mytodo.repository.TodoListItemRepository;
-import com.kimjaejun.mytodo.repository.TodoListRepository;
-import com.kimjaejun.mytodo.utils.DayCalculator;
+import com.kimjaejun.mytodo.utils.DateCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,19 +26,17 @@ public class HomeController {
         }
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         List<TodoListItem> findItems = todoListItemRepository.findByNoSuccessThisWeek(member);
-
-        DayCalculator dayCalculator = new DayCalculator();
-        dayCalculator.thisWeek();
-        model.addAttribute("startDay",dayCalculator.getStart());
-        model.addAttribute("endDay", dayCalculator.getEnd());
+        List<TodoListItem> successFindItems = todoListItemRepository.findBySuccessThisWeek(member);
+        DateCalculator dateCalculator = new DateCalculator();
+        dateCalculator.thisWeek();
+        model.addAttribute("startDay", dateCalculator.getStart());
+        model.addAttribute("endDay", dateCalculator.getEnd());
         model.addAttribute("todoList",findItems);
+        model.addAttribute("successFindItems",successFindItems);
         return "loginhome";
     }
 
-    @GetMapping("/statistics")
-    public String statistics(){
-        return "statistics";
-    }
+
     @GetMapping("/timeplan")
     public String timeplan(){
         return "timeplan";
