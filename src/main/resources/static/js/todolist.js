@@ -7,6 +7,8 @@ const sidebarsearch=document.querySelector("div.todolist__sidebarsearch");
 const todolist__contentcontainerForm=document.querySelector("div.todolist__contentcontainer__form");
 const todolist__addbutton=document.querySelector("div.todolist__contentcontainer__todolist__addbutton");
 const todolist__formcancelbutton=document.querySelector("div.todolist__contentcontainer__form__buttons__cancel");
+const content=document.querySelector("div.todolist__contentcontainer__todolist");
+
 //=================달력날짜 현재 날짜로 변경=========================//
 // Date.prototype.toDateInputValue = (function() {
 //     var local = new Date(this);
@@ -42,6 +44,11 @@ function handle_button_cancelForm(form){
     const textarea = document.querySelector("div.todolist__contentcontainer__form textarea");
     textarea.value = "";
 }
+function allClose(){
+    todolist__contentcontainerForm.classList.remove("formvisible");
+    sidebarpast.classList.remove("formvisible");
+    sidebarsearch.classList.remove("formvisible");
+}
 /**
  * 사이드바 조작 js
  */
@@ -62,3 +69,8 @@ searchbutton.addEventListener("click",() =>handle_button_click(searchbutton,todo
  */
  todolist__addbutton.addEventListener("click",() =>handle_button_clickForm(todolist__contentcontainerForm));
  todolist__formcancelbutton.addEventListener("click",() =>handle_button_cancelForm(todolist__contentcontainerForm));
+
+ /**
+  * form 끄기
+  */
+  content.addEventListener("click",allClose);

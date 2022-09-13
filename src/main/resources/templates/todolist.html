@@ -102,19 +102,19 @@
                     </div>
                 </div>
 
-                    <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
-                    <div class="todolist__contentcontainer__form">
-                        <form action="" method="post" th:object="${addform}" th:action="@{/todolist/{id}/add (id=${addform.getRegisterDate()})}">
-                            <textarea th:field="*{text}"maxlength="1000"></textarea>
-                            <div class ="todolist__contentcontainer__form__buttons">
-                                <button class="todolist__contentcontainer__form__buttons__add">저장</button>
-                                <div class="todolist__contentcontainer__form__buttons__cancel">취소</div>
-                            </div>
-
-                        </form>
-                    </div>
+                   
             </div>
+            <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
+            <div class="todolist__contentcontainer__form">
+                <form action="" method="post" th:object="${addform}" th:action="@{/todolist/{id}/add (id=${addform.getRegisterDate()})}">
+                    <textarea th:field="*{text}"maxlength="1000"></textarea>
+                    <div class ="todolist__contentcontainer__form__buttons">
+                        <button class="todolist__contentcontainer__form__buttons__add">저장</button>
+                        <div class="todolist__contentcontainer__form__buttons__cancel">취소</div>
+                    </div>
 
+                </form>
+            </div>
         </div>
     </div>
 
