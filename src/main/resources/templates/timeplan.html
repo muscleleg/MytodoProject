@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyToDo - 시간계획</title>
-    <link rel="stylesheet" href="../static/css/style.css"th:href="@{css/style.css}">
+    <link rel="stylesheet" href="../static/css/style.css"th:href="@{/css/style.css}">
     <script
   src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
   integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
   crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/b3dd31cfb2.js" crossorigin="anonymous"></script>
 
 
 
@@ -40,9 +41,30 @@
     </div>
 
     <div class="contents">
-       
+        <div class="statics__contents__title" th:each="timePlan:${timePlans}">
+            <a th:href="|/timeplan/${timePlan.getTitle()}|"><p th:text="${timePlan.getTitle()}">테스트 제목</p></a>
+        </div>
+        <div class="statics__contents__title" th:if="${timePlans == null} or ${timePlans.size() == 0}">
+            <p>저장된 계획이 없습니다.</p>
+        </div>
+
+    </div>
+    <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
+    <div class="todolist__contentcontainer__form">
+        <form action="" method="post" th:object="${timePlanAddForm}" th:action="@{/timeplan/add}">
+            <textarea th:field="*{title}"maxlength="100"></textarea>
+            <p style="color: red;"th:if="${#fields.hasErrors('title')}"
+               th:errors="*{title}">Incorrect date</p>
+            <p style="color: red;"th:if="${error=='DuplicateTitle'}">이미 추가된 계획입니다.</p>
+            <div class ="todolist__contentcontainer__form__buttons">
+                <button class="todolist__contentcontainer__form__buttons__add">저장</button>
+                <div class="todolist__contentcontainer__form__buttons__cancel">취소</div>
+            </div>
+
+        </form>
     </div>
 </body>
 <script type="text/javascript" th:src="@{js/removetransition.js}" src="../static/js/removetransition.js"></script>
+<script type="text/javascript" th:src="@{/js/timeplan.js}" src="../static/js/timeplan.js"></script>
 
 </html>

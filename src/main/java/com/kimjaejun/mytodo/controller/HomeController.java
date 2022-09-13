@@ -37,10 +37,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/timeplan")
-    public String timeplan(){
-        return "timeplan";
-    }
+
     @GetMapping("/group")
     public String group(){
         return "group";

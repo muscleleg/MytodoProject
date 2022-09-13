@@ -73,6 +73,7 @@ public class DateCalculator {
         }
         return end;
     }
+    //==해당월이 몇 주 있는지 리스트로 출력==/
     public List<Integer> getWeekFromMonth(int year, int month) {
         ArrayList<Integer> list = new ArrayList<>();
         DateCalculator dateCalculator = new DateCalculator();
