@@ -1,11 +1,14 @@
 package com.kimjaejun.mytodo.domain;
 
+import lombok.Getter;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+@Getter
 @Entity
 public class TimePlanItem {
     @Id
@@ -18,22 +21,21 @@ public class TimePlanItem {
     private TimePlan timePlan;
 
     private String title;
-    private String content;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+
+    private LocalTime startDate;
+    private LocalTime endDate;
 
     protected TimePlanItem() {
     }
 
-    public TimePlanItem(TimePlan timePlan, String title, String content, LocalDateTime startDate, LocalDateTime endDate) {
+    public TimePlanItem(TimePlan timePlan, String title,  LocalTime startDate, LocalTime endDate) {
         this.timePlan = timePlan;
         this.title = title;
-        this.content = content;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    public static TimePlanItem createTimePlanItem(TimePlan timePlan, String title, String content, LocalDateTime startDate, LocalDateTime endDate){
-        TimePlanItem timePlanItem = new TimePlanItem(timePlan, title, content, startDate, endDate);
+    public static TimePlanItem createTimePlanItem(TimePlan timePlan, String title,  LocalTime startDate, LocalTime endDate){
+        TimePlanItem timePlanItem = new TimePlanItem(timePlan, title, startDate, endDate);
         return timePlanItem;
     }
 }

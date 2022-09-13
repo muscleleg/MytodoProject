@@ -3,7 +3,6 @@ package com.kimjaejun.mytodo.repository;
 import com.kimjaejun.mytodo.SessionConst;
 import com.kimjaejun.mytodo.domain.Member;
 import com.kimjaejun.mytodo.domain.TimePlan;
-import com.kimjaejun.mytodo.domain.TimePlanItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +29,11 @@ public class TimePlanRepository {
         } catch (Exception e) {
             return null;
         }
-        }
+    }
+
+    public TimePlan findById(Long id) {
+        return em.find(TimePlan.class, id);
+    }
 
     public List<TimePlan> findAll(HttpSession session) {
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);

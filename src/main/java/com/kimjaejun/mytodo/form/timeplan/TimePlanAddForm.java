@@ -3,20 +3,20 @@ package com.kimjaejun.mytodo.form.timeplan;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
-@Getter@Setter
+@Getter
 public class TimePlanAddForm {
-    @NotEmpty(message = "제목 입력은 필수 입니다.")
+    private Long Id;
     private String title;
     private LocalDate registerDate;
 
     public TimePlanAddForm() {
     }
 
-    public TimePlanAddForm(String title, LocalDate registerDate) {
+    public TimePlanAddForm(Long id, String title, LocalDate registerDate) {
+        Id = id;
         this.title = title;
         this.registerDate = registerDate;
     }

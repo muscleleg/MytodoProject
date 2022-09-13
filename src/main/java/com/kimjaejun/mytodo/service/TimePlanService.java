@@ -1,10 +1,8 @@
 package com.kimjaejun.mytodo.service;
 
-import com.kimjaejun.mytodo.domain.Member;
 import com.kimjaejun.mytodo.domain.TimePlan;
 import com.kimjaejun.mytodo.repository.TimePlanRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +15,10 @@ public class TimePlanService {
     public void join(TimePlan timePlan) {
         validateDuplicateTodoList(timePlan);
         timePlanRepository.save(timePlan);
+    }
+    public TimePlan findById(Long id) {
+        return timePlanRepository.findById(id);
+
     }
     private void validateDuplicateTodoList(TimePlan timePlan) {
         TimePlan finTimePlan = timePlanRepository.findByText(timePlan);

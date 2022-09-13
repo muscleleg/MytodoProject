@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyToDo - 시간계획</title>
-    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/style.css"th:href="@{/css/style.css}">
     <script
   src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
   integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
@@ -34,30 +34,32 @@
             </div>
             <a href="login.html" th:href="@{/logout}">
                 <div class="login">
-                <span>로그아웃</span>
+                <span>로그아웃</sapn>
                 </div>
             </a>
         </div>
     </div>
 
     <div class="contents">
-        <div class="statics__contents__title" th:each="timePlan:${timePlans}">
-            <a th:href="|/timeplan/${timePlan.getId()}|"><p th:text="${timePlan.getTitle()}">테스트 제목</p></a>
+        <div class="statics__contents__title" th:each="timePlanItem:${timePlanItems}">
+            <p th:text="${timePlanItem.getTitle()}">테스트 제목</p>
         </div>
-        <div class="statics__contents__title" th:if="${timePlans == null} or ${timePlans.size() == 0}">
-            <p>저장된 계획이 없습니다.</p>
+        <div class="statics__contents__title" th:if="${timePlanItems == null} or ${timePlanItems.size() == 0}">
+            <p>item저장된 계획이 없습니다.</p>
         </div>
 
     </div>
     <div class="todolist__contentcontainer__todolist__addbutton"><i class="fa-solid fa-plus"></i></div>
     <div class="todolist__contentcontainer__form">
-        <form method="post"  th:action="@{/timeplan/add}">
-<!--            <textarea th:field="*{title}"maxlength="100"></textarea>-->
-            <textarea th:name="title" maxlength="1000"></textarea>
+        <form action="" method="post" th th:action="|/timeplan/${timePlan.id}/add|">
+            <input th:name="title" type="text">
+            <div class="todolist__contentcontainer__form__time">
+                <span>시작시간 <input th:name="startTime" type="time"></span>
+                <span>종료시간 <input th:name="endTime"type="time"></span>
+            </div>
+            <p style="color: red;"th:if="${error=='timeException'}">시간입력이 잘못되었습니다.</p>
+            <p style="color: red;"th:if="${error=='titleNull'}">빈 문자열은 허용되지 않습니다.</p>
 
-
-            <p style="color: red;"th:if="${error=='DuplicateTitle'}">이미 추가된 계획입니다.</p>
-            <p style="color: red;"th:if="${error=='null'}">빈 문자열은 허용되지 않습니다.</p>
 
             <div class ="todolist__contentcontainer__form__buttons">
                 <button class="todolist__contentcontainer__form__buttons__add">저장</button>
