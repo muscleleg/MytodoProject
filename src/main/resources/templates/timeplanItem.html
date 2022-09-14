@@ -13,6 +13,7 @@
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/b3dd31cfb2.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" th:href="@{/css/timetablejs.css}" href="../static/css/timetablejs.css">
 
 
 </head>
@@ -29,7 +30,6 @@
                     <a href="todolist.html" th:href="@{/todolist}"><span>일정추가</span></a>
                     <a href="statistics.html" th:href="@{/statistics}"><span >통계</span></a>
                     <a href="timeplan.html" th:href="@{/timeplan}"><span class="bold">시간계획</span></a>
-                    <a href="group.html" th:href="@{/group}"><span>모임</span></a>
                 </div>
             </div>
             <a href="login.html" th:href="@{/logout}">
@@ -40,12 +40,18 @@
         </div>
     </div>
 
-    <div class="contents">
-        <div class="statics__contents__title" th:each="timePlanItem:${timePlanItems}">
+    <div class="timeplan__contents">
+        <div class="timeplanItem__contents__title">시간계획표</div>
+        <div class="timetable"th:if="${timePlanItems.size() != 0}"></div>
+
+
+        <div class="timeplan__contents__timeplanItem" th:each="timePlanItem:${timePlanItems}">
             <p th:text="${timePlanItem.getTitle()}">테스트 제목</p>
+            <a th:href="|/timeplan/${timePlan.getId()}/delete/${timePlanItem.getId()}|" class="timeplan__contents__icon"><i class="fa-regular fa-trash-can"></i></a>
+
         </div>
-        <div class="statics__contents__title" th:if="${timePlanItems == null} or ${timePlanItems.size() == 0}">
-            <p>item저장된 계획이 없습니다.</p>
+        <div class="timeplan__contents__timeplan" th:if="${timePlanItems == null} or ${timePlanItems.size() == 0}">
+            <p>저장된 일정이 없습니다.</p>
         </div>
 
     </div>
@@ -57,8 +63,8 @@
                 <span>시작시간 <input th:name="startTime" type="time"></span>
                 <span>종료시간 <input th:name="endTime"type="time"></span>
             </div>
-            <p style="color: red;"th:if="${error=='timeException'}">시간입력이 잘못되었습니다.</p>
-            <p style="color: red;"th:if="${error=='titleNull'}">빈 문자열은 허용되지 않습니다.</p>
+            <p th:id="error" style="color: red;"th:if="${error=='timeException'}">시간입력이 잘못되었습니다.</p>
+            <p th:id="error" style="color: red;"th:if="${error=='titleNull'}">빈 문자열은 허용되지 않습니다.</p>
 
 
             <div class ="todolist__contentcontainer__form__buttons">
@@ -69,7 +75,26 @@
         </form>
     </div>
 </body>
-<script type="text/javascript" th:src="@{js/removetransition.js}" src="../static/js/removetransition.js"></script>
+<script type="text/javascript" th:src="@{/js/removetransition.js}" src="../static/js/removetransition.js"></script>
 <script type="text/javascript" th:src="@{/js/timeplan.js}" src="../static/js/timeplan.js"></script>
+<script th:src="@{/js/timetable.js}" src="../static/js/timetable.js"></script>
+<script th:inline="javascript">
+    var timetable = new Timetable();
+
+    timetable.setScope(0, 0);
+
+    timetable.addLocations(/*[[${label}]]*/[1, 'Madrid', 'Los Angeles', 'London', 'New York', 'Jakarta', 'Tokyo']);
+
+    /*[# th:each="d,index : ${data}"]*/
+    timetable.addEvent(/*[[${d.title}]]*/,/*[[${index.count}]]*/, new Date(2015,7,/*[[${d.today}]]*/,/*[[${d.startHour}]]*/,/*[[${d.startMin}]]*/), new Date(2015,7,/*[[${d.nextDay}]]*/,/*[[${d.endHour}]]*/,/*[[${d.endMin}]]*/),"#");
+    /*[/]*/
+
+
+    var renderer = new Timetable.Renderer(timetable);
+    renderer.draw('.timetable');
+</script>
+
+
+
 
 </html>

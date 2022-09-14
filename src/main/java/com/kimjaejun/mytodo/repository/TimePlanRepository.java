@@ -41,4 +41,8 @@ public class TimePlanRepository {
                 .setParameter("member",member)
                 .getResultList();
     }
+
+    public void remove(TimePlan timePlan) {
+        em.remove(timePlan);
+    }
 }

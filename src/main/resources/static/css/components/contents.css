@@ -4,7 +4,7 @@
     width: 100%;
     min-width: 1169px;
 
-    border: 2px solid black;
+    /* border: 2px solid black; */
     flex-grow: 1;
     margin-bottom: 30px;
     justify-content: center;

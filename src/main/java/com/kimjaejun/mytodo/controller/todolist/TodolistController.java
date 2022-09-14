@@ -62,7 +62,11 @@ public class TodolistController {
         return "searchTodolist";
     }
     @GetMapping("/todolist/{date}")
-    public String addTodoListItem(@PathVariable("date") String stringDate,HttpSession session, Model model) {
+    public String addTodoListItem(@PathVariable("date") String stringDate,HttpSession session, Model model,HttpServletRequest request) {
+        String error = request.getParameter("error");
+        if(error!=null&&error.equals("titleNull")){
+            model.addAttribute("error", "titleNull");
+        }
         LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
 
         //==빈폼 보내기, todolist.html의 addform에 쓰기위해==//
@@ -96,7 +100,9 @@ public class TodolistController {
 
     @PostMapping("/todolist/{date}/add")
     public String addTodoListItem(@PathVariable("date") String stringDate, @ModelAttribute("form") TodoListAddForm form, HttpSession session) {
-
+        if(form.getText()==null||form.getText().equals("")){
+            return "redirect:/todolist/"+stringDate+"?error=titleNull";
+        }
         LocalDate date = LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
 //        String stringDate = date.format(DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);

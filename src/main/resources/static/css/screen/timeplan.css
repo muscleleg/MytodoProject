@@ -1,0 +1,94 @@
+.timeplan__contents{
+    box-sizing: border-box;
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    /* border: 2px solid black; */
+    flex-grow: 1;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 2306px;
+}
+.timeplan__contents__title{
+    box-sizing: border-box;
+    width: 200px;
+
+    padding:10px 30px;
+    /*text-decoration-line: underline;*/
+    font-weight: bold;
+    /*text-decoration-style: solid;*/
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    margin:10px 0px;
+    border-radius: 10px;
+    text-align: center;
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    user-select:none
+}
+.timeplanItem__contents__title{
+    box-sizing: border-box;
+    width: 200px;
+    margin:10px 0px;
+
+    padding:10px 30px;
+    /*text-decoration-line: underline;*/
+    font-weight: bold;
+    /*text-decoration-style: solid;*/
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    border-radius: 10px;
+    text-align: center;
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    user-select:none
+}
+.timeplan__contents__timeplan,.timeplan__contents__timeplanItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 1169px;
+    padding:10px 30px;
+    /*text-decoration-line: underline;*/
+    font-weight: normal;
+    /*text-decoration-style: solid;*/
+    -webkit-box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    box-shadow: 0px 0px 17px -7px rgba(0,0,0,0.44);
+    margin:10px 0px;
+    border-radius: 10px;
+    transition: all ease-in-out 0.25s;
+    user-select:none
+}
+.timeplan__contents__timeplanItem input[type="text"]:focus{
+    outline: none;
+    -webkit-box-shadow: 0px 0px 10px 0px #FF92C0; 
+    box-shadow: 0px 0px 10px 0px #FF92C0;
+
+}
+.timeplan__contents__timeplan p{
+    padding: 10px 0px;
+}
+.timeplan__contents__timeplan__container{
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.timeplan__contents__timeplan:hover{
+    -webkit-box-shadow: 0px 0px 9px 8px rgba(185, 185, 185);
+    box-shadow: 0px 0px 9px 8px rgba(185, 185, 185);
+}
+.timeplan__contents__icon {
+    padding: 10px;
+    border-radius: 10px;
+
+    transition: all ease-in-out 0.25s;
+
+}
+.timeplan__contents__icon:hover {
+    color: white;
+
+    background-color: #969696;
+}

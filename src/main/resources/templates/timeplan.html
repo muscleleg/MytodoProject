@@ -29,7 +29,6 @@
                     <a href="todolist.html" th:href="@{/todolist}"><span>일정추가</span></a>
                     <a href="statistics.html" th:href="@{/statistics}"><span >통계</span></a>
                     <a href="timeplan.html" th:href="@{/timeplan}"><span class="bold">시간계획</span></a>
-                    <a href="group.html" th:href="@{/group}"><span>모임</span></a>
                 </div>
             </div>
             <a href="login.html" th:href="@{/logout}">
@@ -40,11 +39,18 @@
         </div>
     </div>
 
-    <div class="contents">
-        <div class="statics__contents__title" th:each="timePlan:${timePlans}">
-            <a th:href="|/timeplan/${timePlan.getId()}|"><p th:text="${timePlan.getTitle()}">테스트 제목</p></a>
+    <div class="timeplan__contents">
+        <div class="timeplan__contents__title">시간계획 목록</div>
+        <div class="timeplan__contents__timeplan" th:each="timePlan:${timePlans}">
+            <a class="timeplan__contents__timeplan__container" th:href="|/timeplan/${timePlan.getId()}|">
+                
+                <p th:text="${timePlan.getTitle()}">테스트 제목</p>
+                
+            </a>
+            <a th:href="|/timeplan/delete/${timePlan.getId()}|" class="timeplan__contents__icon"><i class="fa-regular fa-trash-can"></i></a>
+
         </div>
-        <div class="statics__contents__title" th:if="${timePlans == null} or ${timePlans.size() == 0}">
+        <div class="timeplan__contents__timeplan" th:if="${timePlans == null} or ${timePlans.size() == 0}">
             <p>저장된 계획이 없습니다.</p>
         </div>
 
@@ -56,8 +62,8 @@
             <textarea th:name="title" maxlength="1000"></textarea>
 
 
-            <p style="color: red;"th:if="${error=='DuplicateTitle'}">이미 추가된 계획입니다.</p>
-            <p style="color: red;"th:if="${error=='null'}">빈 문자열은 허용되지 않습니다.</p>
+            <p th:id="error" style="color: red;"th:if="${error=='DuplicateTitle'}">이미 추가된 계획입니다.</p>
+            <p th:id="error" style="color: red;"th:if="${error=='null'}">빈 문자열은 허용되지 않습니다.</p>
 
             <div class ="todolist__contentcontainer__form__buttons">
                 <button class="todolist__contentcontainer__form__buttons__add">저장</button>

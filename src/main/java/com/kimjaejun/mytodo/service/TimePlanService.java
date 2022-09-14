@@ -26,4 +26,8 @@ public class TimePlanService {
             throw new IllegalStateException("이미 존재하는 계획입니다.");
         }
     }
+
+    public void deleteByTimePlan(TimePlan timePlan) {
+        timePlanRepository.remove(timePlan);
+    }
 }

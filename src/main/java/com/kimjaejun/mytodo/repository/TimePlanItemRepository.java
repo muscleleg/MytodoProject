@@ -21,4 +21,13 @@ public class TimePlanItemRepository {
                 .setParameter("timeplan", timePlan)
                 .getResultList();
     }
+
+    public TimePlanItem findById(Long id) {
+        return em.find(TimePlanItem.class, id);
+    }
+
+    public void remove(TimePlanItem timePlanItem) {
+        em.remove(timePlanItem);
+    }
+
 }

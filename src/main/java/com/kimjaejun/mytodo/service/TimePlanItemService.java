@@ -13,6 +13,11 @@ public class TimePlanItemService {
     private final TimePlanItemRepository timePlanItemRepository;
 
     public void join(TimePlanItem timePlanItem) {
+
         timePlanItemRepository.save(timePlanItem);
+    }
+
+    public void delete(TimePlanItem timePlanItem) {
+        timePlanItemRepository.remove(timePlanItem);
     }
 }

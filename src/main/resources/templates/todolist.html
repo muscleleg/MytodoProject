@@ -27,7 +27,6 @@
                         <a href="todolist.html" th:href="@{/todolist}"><span class="bold">일정추가</span></a>
                         <a href="statistics.html" th:href="@{/statistics}"><span >통계</span></a>
                         <a href="timeplan.html" th:href="@{/timeplan}"><span>시간계획</span></a>
-                        <a href="group.html" th:href="@{/group}"><span>모임</span></a>
                     </div>
                 </div>
             <a href="login.html" th:href="@{/logout}">
@@ -108,6 +107,7 @@
             <div class="todolist__contentcontainer__form">
                 <form action="" method="post" th:object="${addform}" th:action="@{/todolist/{id}/add (id=${addform.getRegisterDate()})}">
                     <textarea th:field="*{text}"maxlength="1000"></textarea>
+                    <p th:id="error" style="color: red;"th:if="${error=='titleNull'}">빈 문자열은 허용되지 않습니다.</p>
                     <div class ="todolist__contentcontainer__form__buttons">
                         <button class="todolist__contentcontainer__form__buttons__add">저장</button>
                         <div class="todolist__contentcontainer__form__buttons__cancel">취소</div>

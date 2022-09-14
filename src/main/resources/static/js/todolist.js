@@ -17,6 +17,9 @@ const content=document.querySelector("div.todolist__contentcontainer__todolist")
 // });
 // document.getElementById('date').value = new Date().toDateInputValue();
 //================================================================//
+if (document.getElementById("error") != null) {
+    todolist__contentcontainerForm.classList.toggle("formvisible");
+}
 function handle_button_Enter(b){
     // b.style.backgroundColor ="#a9a9a9";
     b.classList.toggle("buttonEnter");
