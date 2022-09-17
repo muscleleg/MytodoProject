@@ -54,6 +54,8 @@
     -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     transition: all ease-in-out 0.25s;
+    margin-bottom:20px;
+
 }
 .loginhome__contentcontainer__todolist__item:hover{
 

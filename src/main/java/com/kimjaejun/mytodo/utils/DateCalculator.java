@@ -1,6 +1,5 @@
 package com.kimjaejun.mytodo.utils;
 
-import com.kimjaejun.mytodo.domain.Member;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.ChronoField.DAY_OF_WEEK;
-
 @Getter
 public class DateCalculator {
     private LocalDate start;

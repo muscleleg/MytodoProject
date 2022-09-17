@@ -22,7 +22,7 @@ public class TimePlan {
     private String title;
     private LocalDate registerDate;
 
-    @OneToMany(mappedBy = "timePlan")
+    @OneToMany(mappedBy = "timePlan",cascade = CascadeType.ALL)
     private List<TimePlanItem> items = new ArrayList<>();
 
     protected TimePlan() {

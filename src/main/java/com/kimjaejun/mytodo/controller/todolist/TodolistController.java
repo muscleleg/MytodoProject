@@ -114,8 +114,8 @@ public class TodolistController {
     ///todolist/2022-09-07/11/edit?status1=61
     ///todolist/2022-09-07/11/edit?status2=34
 
-    @GetMapping("/todolist/{date}/{todolistItemId}/{status}")
-    public String editStatusTodoListItem(@PathVariable("date") String stringDate, @PathVariable("todolistItemId") String ItemId, @PathVariable("status") String rawStatus, Model model, HttpServletRequest request) {
+    @GetMapping("/todolist/{date}/{todolistItemId}/edit")
+    public String editStatusTodoListItem(@PathVariable("date") String stringDate, @PathVariable("todolistItemId") String ItemId, HttpServletRequest request) {
     //    String status = rawStatus.substring(rawStatus.indexOf("="));
         Enumeration<String> parameterNames = request.getParameterNames();
         String key = parameterNames.nextElement();
